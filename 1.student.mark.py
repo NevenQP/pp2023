@@ -1,8 +1,8 @@
-students = {}
+students = []
 
-courses = {}
+courses = []
 
-marks = {}
+marks = [{"student_id": 'none'}]
 
 
 def inputstudent():
@@ -11,7 +11,7 @@ def inputstudent():
         student_id = input("Enter the student id:")
         name = input("Enter the student name:")
         dob = input("Enter the student dob:")
-        students[student_id] = {'name': name, 'dob': dob}
+        students.append({'student_id': student_id, 'name': name, 'dob': dob})
 
 
 def inputcours():
@@ -19,35 +19,48 @@ def inputcours():
     for i in range(num_course):
         course_id = input("Enter the course id:")
         name = input("Enter the course name:")
-        courses[course_id] = {'name': name}
+        courses.append({'course_id': course_id, 'name': name})
 
 
 def inputmark():
-    course_id = input("Enter the course ID:")
-    if course_id not in courses:
+    course_id = input("Enter the course id:")
+    exist = False
+    for i in range(len(courses)):
+        if course_id == courses[i]['course_id']:
+            exist = True
+            break
+
+    if exist is False:
         print("Invalid id")
         return
-    for student_id in students:
-        mark = int(input(f"Enter student mark for {students[student_id]['name']}: "))
-        if student_id not in marks:
-            marks[student_id] = {}
-        marks[student_id][course_id] = mark
 
+    for student in students:
+        exist = False
+        mark = int(input(f"Enter student mark for {student['name']}: "))
+        for i in range(len(marks)):
+            if student['student_id'] == marks[i]['student_id']:
+                marks[i][course_id] = mark
+                exist = True
+                break
+        if exist is False:
+            marks.append({'student_id': student['student_id'], course_id: mark})
 
 def listcourse():
-    for course_id in courses:
-        print(f"{course_id}: {courses[course_id]['name']}")
+    for course in courses:
+        print(f"{course['course_id']}: {course['name']}")
 
 
 def liststudent():
-    for student_id in students:
-        print(f"{student_id}: name:{students[student_id]['name']} dob:{students[student_id]['dob']}")
+    for student in students:
+        print(f"{student['student_id']}: name:{student['name']} dob:{student['dob']}")
 
 
 def listmark():
     course_id = input("Enter course id that you what to show student marks:")
-    for student_id in students:
-        print(f"{student_id} student:{students[student_id]['name']} mark:{marks[student_id][course_id]}")
+    for student in students:
+        for i in range(len(marks)):
+            if student['student_id'] == marks[i]['student_id']:
+                print(f"{student['student_id']} student:{student['name']} mark:{marks[i][course_id]}")
 
 
 print("Enter 1 to add students")
