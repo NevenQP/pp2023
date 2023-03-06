@@ -45,6 +45,7 @@ def inputmark():
         if exist is False:
             marks.append({'student_id': student['student_id'], course_id: mark})
 
+
 def listcourse():
     for course in courses:
         print(f"{course['course_id']}: {course['name']}")
