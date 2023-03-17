@@ -5,7 +5,7 @@ courses = []
 marks = [{"student_id": 'none'}]
 
 
-def inputstudent():
+def input_student():
     num_student = int(input("Enter the number of student in the class:"))
     for i in range(num_student):
         student_id = input("Enter the student id:")
@@ -14,7 +14,7 @@ def inputstudent():
         students.append({'student_id': student_id, 'name': name, 'dob': dob})
 
 
-def inputcours():
+def input_course():
     num_course = int(input("Enter the number of course in the class:"))
     for i in range(num_course):
         course_id = input("Enter the course id:")
@@ -22,7 +22,7 @@ def inputcours():
         courses.append({'course_id': course_id, 'name': name})
 
 
-def inputmark():
+def input_mark():
     course_id = input("Enter the course id:")
     exist = False
     for i in range(len(courses)):
@@ -46,17 +46,17 @@ def inputmark():
             marks.append({'student_id': student['student_id'], course_id: mark})
 
 
-def listcourse():
+def list_course():
     for course in courses:
         print(f"{course['course_id']}: {course['name']}")
 
 
-def liststudent():
+def list_student():
     for student in students:
         print(f"{student['student_id']}: name:{student['name']} dob:{student['dob']}")
 
 
-def listmark():
+def list_mark():
     course_id = input("Enter course id that you what to show student marks:")
     for student in students:
         for i in range(len(marks)):
@@ -74,17 +74,17 @@ print("Enter 7 to exit")
 while True:
     case = int(input("Enter the action:"))
     if case == 1:
-        inputstudent()
+        input_student()
     elif case == 2:
-        inputcours()
+        input_course()
     elif case == 3:
-        inputmark()
+        input_mark()
     elif case == 4:
-        liststudent()
+        list_student()
     elif case == 5:
-        listcourse()
+        list_course()
     elif case == 6:
-        listmark()
+        list_mark()
     elif case == 7:
         break
     else:
